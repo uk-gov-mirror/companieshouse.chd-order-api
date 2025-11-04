@@ -31,7 +31,7 @@ public class ItemSetup {
         missingImageDeliveriesDTO.setOrderedAt(LocalDateTime.now());
         missingImageDeliveriesDTO.setPaymentReference(PAYMENT_REFERENCE);
         return missingImageDeliveriesDTO;
-    };
+    }
 
     public static MissingImageDeliveriesRequest setUpMissingImageDeliveriesRequest() {
         final MissingImageDeliveriesRequest midRequest = new MissingImageDeliveriesRequest();

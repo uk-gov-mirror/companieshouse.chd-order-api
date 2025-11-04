@@ -28,13 +28,13 @@ class ApiKeyAuthorisationInterceptorTest {
     private HttpServletResponse response;
 
     @Test
-    public void willAuthoriseIfIdentityTypeHeaderIsValid() {
+    void willAuthoriseIfIdentityTypeHeaderIsValid() {
         lenient().doReturn(API_KEY_IDENTITY_TYPE).when(request).getHeader(ERIC_IDENTITY_TYPE);
         assertTrue(apiKeyAuthorisationInterceptor.preHandle(request, response, null));
     }
 
     @Test
-    public void willNotAuthoriseIfIdentityTypeHeaderIsNotValid() {
+     void willNotAuthoriseIfIdentityTypeHeaderIsNotValid() {
         lenient().doReturn("invalid").when(request).getHeader(ERIC_IDENTITY_TYPE);
         assertFalse(apiKeyAuthorisationInterceptor.preHandle(request, response, null));
     }

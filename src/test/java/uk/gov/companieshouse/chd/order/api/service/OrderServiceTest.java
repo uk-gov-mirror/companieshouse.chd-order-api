@@ -160,10 +160,10 @@ class OrderServiceTest {
     @Test
     @DisplayName("test that the payment reference field includes the barcode")
     void paymentRefHasBarcodeAppended() {
-        final MissingImageDeliveriesRequest midRequest = setUpMissingImageDeliveriesRequest();
-        midRequest.setFilingHistoryBarcode(FILING_HISTORY_BARCODE);
+        final MissingImageDeliveriesRequest missingImageDeliveryRequest = setUpMissingImageDeliveriesRequest();
+        missingImageDeliveryRequest.setFilingHistoryBarcode(FILING_HISTORY_BARCODE);
 
-        serviceUnderTest.saveOrderDetails(midRequest);
+        serviceUnderTest.saveOrderDetails(missingImageDeliveryRequest);
 
         Mockito.verify(orderHeaderRepository).save(orderHeaderArgumentCaptor.capture());
 
@@ -175,10 +175,10 @@ class OrderServiceTest {
     @Test
     @DisplayName("Test that the payment reference field includes the entity id")
     void paymentRefHasEntityIdAppended() {
-        final MissingImageDeliveriesRequest midRequest = setUpMissingImageDeliveriesRequest();
-        midRequest.setEntityID(ENTITY_ID);
+        final MissingImageDeliveriesRequest missingImageDeliveryRequest = setUpMissingImageDeliveriesRequest();
+        missingImageDeliveryRequest.setEntityID(ENTITY_ID);
 
-        serviceUnderTest.saveOrderDetails(midRequest);
+        serviceUnderTest.saveOrderDetails(missingImageDeliveryRequest);
 
         Mockito.verify(orderHeaderRepository).save(orderHeaderArgumentCaptor.capture());
 
@@ -190,11 +190,11 @@ class OrderServiceTest {
     @Test
     @DisplayName("Test that the payment reference field includes the entity id when both entity id and barcode are available")
     void paymentRefHasEntityIdAppendedWhenBarcodeIsAlsoAvailable() {
-        final MissingImageDeliveriesRequest midRequest = setUpMissingImageDeliveriesRequest();
-        midRequest.setEntityID(ENTITY_ID);
-        midRequest.setFilingHistoryBarcode(FILING_HISTORY_BARCODE);
+        final MissingImageDeliveriesRequest missingImageDeliveryRequest = setUpMissingImageDeliveriesRequest();
+        missingImageDeliveryRequest.setEntityID(ENTITY_ID);
+        missingImageDeliveryRequest.setFilingHistoryBarcode(FILING_HISTORY_BARCODE);
 
-        serviceUnderTest.saveOrderDetails(midRequest);
+        serviceUnderTest.saveOrderDetails(missingImageDeliveryRequest);
 
         Mockito.verify(orderHeaderRepository).save(orderHeaderArgumentCaptor.capture());
 
@@ -207,7 +207,7 @@ class OrderServiceTest {
     @DisplayName("Test Exception on Creating MID - Order Service Exception")
     void saveOrderDetailsPersistsOrderHeaderTestOrderServiceException() {
         // given
-        final MissingImageDeliveriesRequest midRequest = setUpMissingImageDeliveriesRequest();
+        final MissingImageDeliveriesRequest missingImageDeliveryRequest = setUpMissingImageDeliveriesRequest();
 
         // When
         doThrow(dataAccessException).when(orderHeaderRepository)
@@ -216,7 +216,7 @@ class OrderServiceTest {
         // Then
         Exception exception = assertThrows(
                 OrderServiceException.class,
-                () -> serviceUnderTest.saveOrderDetails(midRequest));
+                () -> serviceUnderTest.saveOrderDetails(missingImageDeliveryRequest));
         assertTrue(exception.getMessage().contains(MSG_ERROR));
     }
 
@@ -224,14 +224,14 @@ class OrderServiceTest {
     @DisplayName("Test Exception on Creating MID - Duplicate Record Exception")
     void saveOrderDetailsPersistsOrderHeaderTestDuplicateException() {
         // given
-        final MissingImageDeliveriesRequest midRequest = setUpMissingImageDeliveriesRequest();
+        final MissingImageDeliveriesRequest missingImageDeliveryRequest = setUpMissingImageDeliveriesRequest();
 
         // When
         when(orderHeaderRepository.existsById(any(String.class)))
                 .thenReturn(true);
 
         Exception exception = assertThrows(DuplicateEntryException.class,
-                () -> serviceUnderTest.saveOrderDetails(midRequest));
+                () -> serviceUnderTest.saveOrderDetails(missingImageDeliveryRequest));
         assertEquals(MSG_DUPLICATE_ERROR, exception.getMessage());
     }
 }

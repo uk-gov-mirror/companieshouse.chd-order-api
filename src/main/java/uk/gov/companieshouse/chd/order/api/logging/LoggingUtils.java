@@ -16,9 +16,6 @@ public class LoggingUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(APPLICATION_NAMESPACE);
 
-    public LoggingUtils() {
-    }
-
     public static Logger getLogger() {
         return LOGGER;
     }
