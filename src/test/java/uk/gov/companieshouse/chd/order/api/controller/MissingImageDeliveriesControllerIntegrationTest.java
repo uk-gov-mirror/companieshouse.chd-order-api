@@ -53,7 +53,7 @@ class MissingImageDeliveriesControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
                 .andExpect(status().isCreated())
-                .andExpect(content().json(content, true));
+                .andExpect(content().json(content));
     }
 
     @Test
