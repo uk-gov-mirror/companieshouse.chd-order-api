@@ -30,27 +30,27 @@ public class ApiKeyAuthenticationInterceptorTest {
     private HttpServletResponse response;
 
     @Test
-    public void willAuthoriseIfEricHeadersArePresent() {
+     void willAuthoriseIfEricHeadersArePresent() {
         lenient().doReturn(ERIC_IDENTITY_VALUE).when(request).getHeader(ERIC_IDENTITY);
         lenient().doReturn(API_KEY_IDENTITY_TYPE).when(request).getHeader(ERIC_IDENTITY_TYPE);
         assertTrue(apiKeyAuthenticationInterceptor.preHandle(request, response, null));
     }
 
     @Test
-    public void willNotAuthoriseIfIdentityHeaderIsNotPresent() {
+     void willNotAuthoriseIfIdentityHeaderIsNotPresent() {
         lenient().doReturn(null).when(request).getHeader(ERIC_IDENTITY);
         lenient().doReturn(API_KEY_IDENTITY_TYPE).when(request).getHeader(ERIC_IDENTITY_TYPE);
         assertFalse(apiKeyAuthenticationInterceptor.preHandle(request, response, null));
     }
 
     @Test
-    public void willNotAuthoriseIfIdentityTypeHeaderIsNotPresent() {
+    void willNotAuthoriseIfIdentityTypeHeaderIsNotPresent() {
         lenient().doReturn(ERIC_IDENTITY_VALUE).when(request).getHeader(ERIC_IDENTITY);
         lenient().doReturn(null).when(request).getHeader(ERIC_IDENTITY_TYPE);
         assertFalse(apiKeyAuthenticationInterceptor.preHandle(request, response, null));
     }
     @Test
-    public void willNotAuthoriseIfIdentityTypeHeaderIsInvalid() {
+    void willNotAuthoriseIfIdentityTypeHeaderIsInvalid() {
         lenient().doReturn(ERIC_IDENTITY_VALUE).when(request).getHeader(ERIC_IDENTITY);
         lenient().doReturn("some-incorrect-identity-type").when(request).getHeader(null);
         assertFalse(apiKeyAuthenticationInterceptor.preHandle(request, response, null));

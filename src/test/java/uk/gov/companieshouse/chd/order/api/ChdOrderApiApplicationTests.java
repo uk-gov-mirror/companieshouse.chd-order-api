@@ -160,10 +160,6 @@ class ChdOrderApiApplicationTests {
         assertFalse(isPresent);
     }
 
-    @Test
-    void contextLoads() {
-    }
-
     private void setAllEnvironmentVariables() {
         environmentVariables.set(CHS_API_KEY, CHS_API_KEY);
         environmentVariables.set(CHPRD_DATASOURCE_URL, CHPRD_DATASOURCE_URL);

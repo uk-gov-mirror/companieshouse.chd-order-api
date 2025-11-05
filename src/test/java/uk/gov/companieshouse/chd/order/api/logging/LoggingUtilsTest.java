@@ -12,18 +12,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import uk.gov.companieshouse.logging.Logger;
 
 @ExtendWith(MockitoExtension.class)
-public class LoggingUtilsTest {
+ class LoggingUtilsTest {
     
     @Test
     @DisplayName("Calling getLogger should return a configured logger")
-    public void getLoggerReturns() {
+    void getLoggerReturns() {
         Logger logger = LoggingUtils.getLogger();
         assertNotNull(logger);
     }
     
     @Test
     @DisplayName("Calling createLoggingDataMap should return a Hash map with one key-value mapped")
-    public void createLoggingDataMapReturn() {
+    void createLoggingDataMapReturn() {
         String key = "key";
         String value = "value";
         Map<String, Object> logMap = LoggingUtils.createLoggingDataMap(key, value);
